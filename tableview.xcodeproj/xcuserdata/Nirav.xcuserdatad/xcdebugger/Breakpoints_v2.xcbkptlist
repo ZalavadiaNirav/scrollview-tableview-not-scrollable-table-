@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tableview/ViewController.m"
-            timestampString = "527928192.519674"
+            timestampString = "530556586.658771"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
-            landmarkName = "-scrollViewDidScroll:"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "-tableViewExpandSection:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

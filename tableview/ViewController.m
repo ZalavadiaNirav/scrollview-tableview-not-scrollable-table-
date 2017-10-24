@@ -11,6 +11,7 @@
 @interface ViewController ()
 {
     bool expandedArr[22];
+    float height;
 }
 @end
 
@@ -24,6 +25,7 @@
     for (int i=0; i<22; i++) {
         expandedArr[i]=0;
     }
+    height=0.0;
     _TBL.rowHeight = UITableViewAutomaticDimension;
     _TBL.estimatedRowHeight = 100;
 }
@@ -33,7 +35,12 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     int manyCells  = expandedArr[indexPath.section];
-    if(manyCells==1)
+    if(indexPath.section==0 &&manyCells==1)
+    {
+        //section=0 have bigger contain so i assign height explicitly 500
+        return height;
+    }
+    else if(manyCells==1)
     {
         return 100;
     }
@@ -96,11 +103,18 @@
     }
     else
     {
-        
+        if(indexPath.section==0)
+        {
+            //here i have big content on section=0
+            height=500.0;
+            cell.selectionStyle=UITableViewCellSelectionStyleNone;
+
+        }
+       
         [cell.contentView addSubview:_expandableVw];
     }
 
-    _scrollVuew.contentSize = CGSizeMake(_TBL.frame.size.width, _TBL.contentSize.height+_TBL.frame.origin.y);
+    _scrollVuew.contentSize = CGSizeMake(_TBL.frame.size.width,(_scrollVuew.frame.origin.y+_scrollVuew.contentSize.height+cell.frame.size.height));
     [_scrollVuew layoutIfNeeded];
 
     return cell;
@@ -108,6 +122,7 @@
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
+    NSLog(@"tbl contentsize w=%f h=%f",_TBL.contentSize.width,_TBL.contentSize.height);
     _tblHeightconstraint.constant=_TBL.contentSize.height;
 }
 
